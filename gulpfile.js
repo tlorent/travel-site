@@ -1,5 +1,8 @@
 var gulp = require('gulp'),
-watch = require('gulp-watch');
+watch = require('gulp-watch'),
+postcss = require('gulp-postcss'),
+autoprefixer = require('autoprefixer'),
+cssvars = require('postcss-simple-vars');
 
 /*
 You use the task method of gulp to create a new task.
@@ -15,7 +18,11 @@ gulp.task('html', function() {
 });
 
 gulp.task('styles', function() {
-  console.log("Useful CSS stuff.");
+  return gulp.src('./app/assets/styles/styles.css')
+    // The second pipe connects gulp source with gulp destination
+    // The first pipe allows the CSS to run through post-css filters
+    .pipe(postcss([cssvars, autoprefixer]))
+    .pipe(gulp.dest('./app/temp/styles'));
 });
 
 gulp.task('watch', function() {
