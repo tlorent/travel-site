@@ -461,15 +461,28 @@ img {
 }
 
 .large-hero {
+
   position: relative;
 }
 
 .large-hero__text-content {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(0);
-          transform: translateY(0); /* position an element vertically relative to itself */
-  left: 0;
-  width: 100%;
-  text-align: center;
-}
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%); /* position an element vertically relative to itself */
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+.large-hero__title {
+    font-weight: 300;
+    color: #2f5572;
+    font-size: 4.8rem;
+  }
+
+.large-hero__subtitle {
+    font-weight: 300;
+    color: #2f5572;
+    font-size: 2.9rem;
+  }
