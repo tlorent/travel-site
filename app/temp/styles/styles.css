@@ -1,12 +1,4 @@
 body {
-  color: #2f5572;
-  padding: 10px;
-  margin: 10px;
-  -webkit-columns: 300px 2;
-          columns: 300px 2;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
 }
-
-.box a {
-    display: block;
-    padding: 10px;
-  }
