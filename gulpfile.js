@@ -4,7 +4,8 @@ postcss = require('gulp-postcss'),
 autoprefixer = require('autoprefixer'),
 cssvars = require('postcss-simple-vars'),
 nested = require('postcss-nested'),
-cssImport = require('postcss-import');
+cssImport = require('postcss-import'),
+browserSync = require('browser-sync').create();
 
 /*
 You use the task method of gulp to create a new task.
@@ -31,16 +32,33 @@ gulp.task('styles', function() {
 
 gulp.task('watch', function() {
 
+  // Initialize the browsersync init method
+  // and indicate where the base directory of the server should get the html
+  browserSync.init({
+    notify: false,
+    server: {
+      baseDir: "app"
+    }
+  })
+
   // You pass two arguments: one for the file you want to watch
   // the second, what needs to happen when Gulp watches
   watch('./app/index.html', function() {
-    gulp.start('html') // Indicate which Gulp task should be started
+    browserSync.reload();
   });
 
   /* with **, watch for any future hypothetical folders in the styles
   folder, with any .css extensions */
   watch('./app/assets/styles/**/*.css', function() {
-    gulp.start('styles');
+    gulp.start('cssInject'); // Indicate which Gulp task should be started
   });
 
 });
+
+/* As the second argument, add the 'styles' task as a dependency
+"Gulp, before you run the cssInject task, you must begin & complete"
+any dependency tasks listed in the second argument. */
+gulp.task('cssInject', ['styles'], function() {
+  return gulp.src('./app/temp/styles/styles.css')
+    .pipe(browserSync.stream()); // make whatever you're piping into browserSync available in the browser
+})
