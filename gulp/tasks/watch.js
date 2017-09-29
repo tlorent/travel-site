@@ -30,6 +30,10 @@ gulp.task('watch', function() {
     gulp.start('cssInject'); // Indicate which Gulp task should be started
   });
 
+  watch('.app/assets/scripts/**/*.js', function() {
+    gulp.start('scriptsRefresh');
+  })
+
 });
 
 /* As the second argument, add the 'styles' task as a dependency
@@ -38,4 +42,8 @@ any dependency tasks listed in the second argument. */
 gulp.task('cssInject', ['styles'], function() {
   return gulp.src('./app/temp/styles/styles.css')
     .pipe(browserSync.stream()); // make whatever you're piping into browserSync available in the browser
+})
+
+gulp.task('scriptsRefresh', ['scripts'], function() {
+  browserSync.reload();
 })
