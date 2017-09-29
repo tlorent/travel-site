@@ -16,7 +16,7 @@ gulp.task('watch', function() {
     server: {
       baseDir: "app"
     }
-  })
+  });
 
   // You pass two arguments: one for the file you want to watch
   // the second, what needs to happen when Gulp watches
@@ -30,7 +30,7 @@ gulp.task('watch', function() {
     gulp.start('cssInject'); // Indicate which Gulp task should be started
   });
 
-  watch('.app/assets/scripts/**/*.js', function() {
+  watch('./app/assets/scripts/**/*.js', function() {
     gulp.start('scriptsRefresh');
   })
 
