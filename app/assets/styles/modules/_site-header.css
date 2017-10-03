@@ -3,13 +3,21 @@
   position: absolute;
   width: 100%;
   z-index: 2;
+  transition: background-color .3s ease-out;
+
+  &--is-expanded {
+    background-color: rgba(47, 85, 114, .55);
+  }
 
   @mixin atMedium {
     background-color: rgba(47, 85, 114, .3);
   }
 
   &__btn-container {
-    float: right;
+
+    @mixin atMedium {
+      float: right;
+    }
   }
 
   &__logo {
@@ -30,11 +38,43 @@
 
   &__menu-icon {
     width: 20px;
-    height: 20px;
-    background-color: #fff;
+    height: 19px;
     position: absolute;
+    z-index: 10;
     top: 10px;
     right: 10px;
+
+    &::before {
+      /* Position the first bar in the top left corner*/
+      content: ""; /* Add pseudo-content */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    &__middle {
+      /* Position the first bar in the top left corner of its parent div */
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    &::after {
+      /* Position the first bar in the top left corner*/
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+    }
 
     @mixin atMedium {
       display: none;
@@ -42,14 +82,25 @@
   }
 
   &__menu-content {
-    display: none;
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all .3s ease-out;
+    z-index: -10;
+    position: relative; /* Needed for the browser to recognise the z-index */
+    padding-top: 80px;
+    text-align: center;
 
     @mixin atMedium {
-      display: block;
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      transform: scale(1);
     }
 
     &--is-visible {
-      display: block;
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1);
     }
   }
 }
