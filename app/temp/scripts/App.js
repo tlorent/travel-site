@@ -70,52 +70,34 @@
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _MobileMenu = __webpack_require__(1);
 
-var _Person2 = __webpack_require__(1);
-
-var _Person3 = _interopRequireDefault(_Person2);
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var mobileMenu = new _MobileMenu2.default();
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var $ = __webpack_require__(2);
-
-/*
-The Adult class inherites all the
-properties and methods of the Person class.
-What you include here will be unique to the Adult object.
-*/
-var Adult = function (_Person) {
-  _inherits(Adult, _Person);
-
-  function Adult() {
-    _classCallCheck(this, Adult);
-
-    return _possibleConstructorReturn(this, (Adult.__proto__ || Object.getPrototypeOf(Adult)).apply(this, arguments));
-  }
-
-  _createClass(Adult, [{
-    key: 'payTaxes',
-    value: function payTaxes() {
-      console.log(this.name + " now owes $100 in taxes.");
-    }
-  }]);
-
-  return Adult;
-}(_Person3.default);
-
-var john = new _Person3.default("John Doe", "blue");
-john.greet();
-
-var jane = new Adult("Jane Smith", "purple");
-jane.greet();
-jane.payTaxes();
+// var $ = require('jquery');
+// import Person from './modules/Person';
+//
+// /*
+// The Adult class inherites all the
+// properties and methods of the Person class.
+// What you include here will be unique to the Adult object.
+// */
+// class Adult extends Person {
+//   payTaxes() {
+//     console.log(this.name + " now owes $100 in taxes.");
+//   }
+// }
+//
+// var john = new Person("John Doe", "blue");
+// john.greet();
+//
+// var jane = new Adult("Jane Smith", "purple");
+// jane.greet();
+// jane.payTaxes();
 
 /***/ }),
 /* 1 */
@@ -130,39 +112,51 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _jquery = __webpack_require__(2);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// ES6 version
-var Person = function () {
-  function Person(fullName, favColor) {
-    _classCallCheck(this, Person);
+var MobileMenu = function () {
 
-    this.name = fullName;
-    this.favColor = favColor;
+  /* This function will run immediately when
+  a new object is created with the class MobileMenu */
+  function MobileMenu() {
+    _classCallCheck(this, MobileMenu);
+
+    this.menuIcon = (0, _jquery2.default)(".site-header__menu-icon");
+    this.menuContent = (0, _jquery2.default)(".site-header__menu-content");
+    this.events();
   }
 
-  _createClass(Person, [{
-    key: "greet",
-    value: function greet() {
-      console.log("HI, my name is " + this.name + " and my favourite colour is " + this.favColor + " .");
+  // Specify which events to watch for in this method
+
+
+  _createClass(MobileMenu, [{
+    key: "events",
+    value: function events() {
+      this.menuIcon.click(this.toggleTheMenu.bind(this));
+      // When the menuIcon is clicked, call the toggleMenu method
+
+      // the this in bind refers to the this of the events method, which
+      // is the MobileMenu class
+      // so now the this in toggleTheMenu refers to the this.menuContent
+      // in the constructor function
+    }
+  }, {
+    key: "toggleTheMenu",
+    value: function toggleTheMenu() {
+      this.menuContent.toggleClass("site-header__menu-content--is-visible");
     }
   }]);
 
-  return Person;
+  return MobileMenu;
 }();
 
-exports.default = Person;
-
-// ES5 version //
-// function Person(fullName, favColor) {
-//   this.name = fullName;
-//   this.favColor = favColor;
-//   this.greet = function() {
-//     console.log("Hello, my name is " + this.name + " and my favourite colour is " + this.favColor + " .");
-//   }
-// }
-//
-// module.exports = Person;
+exports.default = MobileMenu;
 
 /***/ }),
 /* 2 */
