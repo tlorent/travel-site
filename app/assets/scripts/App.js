@@ -1,9 +1,17 @@
 import MobileMenu from './modules/MobileMenu';
+import RevealOnScroll from './modules/RevealOnScroll';
+import $ from 'jquery';
 
 var mobileMenu = new MobileMenu();
 
+// Just like when creating a new Person instance,
+// you pass two arguments for each RevealOnScroll instance to be created
+// First, which element and second which offset
 
-
+// Now you can determine which element should be revelead on scroll
+// by specifying the element and the offset
+new RevealOnScroll($(".feature-item"), "85%");
+new RevealOnScroll($(".testimonial"), "60%");
 
 
 
