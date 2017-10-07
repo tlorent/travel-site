@@ -10,7 +10,12 @@
   }
 
   @mixin atMedium {
+    position: fixed;
     background-color: rgba(47, 85, 114, .3);
+
+    &--dark {
+      background-color: rgba(23, 51, 72, .85);
+    }
   }
 
   &__btn-container {
@@ -25,14 +30,20 @@
     background-color: $mainBlue;
     padding: 25px 36px;
     top: 0;
-    width: 40%;
+    /*width: 40%;*/
     left: 50%;
-    transform: translateX(-50%); /* move the element half of its width on the X-axis */
+    transform: translateX(-50%) scale(.8); /* move the element half of its width on the X-axis */
+    transition: transform .3s ease-out;
+    transform-origin: 50% 0;
 
     @mixin atMedium {
       left: auto;
       transform: translateX(0);
-      width: auto;
+      /*width: auto;*/
+
+      .site-header--dark & {
+        transform: scale(.545);
+      }
     }
   }
 

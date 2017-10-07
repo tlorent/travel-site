@@ -1044,8 +1044,13 @@ a {
 @media (min-width: 800px) {
 
 .site-header {
+    position: fixed;
     background-color: rgba(47, 85, 114, .3)
 }
+
+    .site-header--dark {
+      background-color: rgba(23, 51, 72, .85);
+    }
   }
 
 @media (min-width: 800px) {
@@ -1060,22 +1065,31 @@ a {
     background-color: #2f5572;
     padding: 25px 36px;
     top: 0;
-    width: 40%;
+    /*width: 40%;*/
     left: 50%;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    -webkit-transform: translateX(-50%) scale(.8);
+            transform: translateX(-50%) scale(.8); /* move the element half of its width on the X-axis */
+    -webkit-transition: -webkit-transform .3s ease-out;
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    -webkit-transform-origin: 50% 0;
+            transform-origin: 50% 0;
   }
-
-/* move the element half of its width on the X-axis */
 
 @media (min-width: 800px) {
 
 .site-header__logo {
       left: auto;
       -webkit-transform: translateX(0);
-              transform: translateX(0);
-      width: auto
+              transform: translateX(0)
+      /*width: auto;*/
   }
+
+      .site-header--dark .site-header__logo {
+        -webkit-transform: scale(.545);
+                transform: scale(.545);
+      }
   }
 
 .site-header__menu-icon {
@@ -1260,7 +1274,12 @@ a {
       font-size: 1rem;
       padding: 12px 0;
       background-color: transparent
+
+      /* Use if the current a element has a class of is-current-link */
   }
+      .primary-nav a.is-current-link {
+        color: #fabb69;
+      }
   }
 
 .reveal-item {
