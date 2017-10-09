@@ -1,0 +1,22 @@
+/* Do not edit modules/_sprite directly as it is generated automatically by Gulp. Instead edit gulp/templates/sprite */
+
+/* Any code included within the {shapes} lines will be looped through for each icon. */
+
+/* Any code included within the {first} lines will only run once for the first item that gets looped through. You only want to use background-image once because all the current icons come from the same file */
+
+/* Use a variable, .icon--base, to leave an opening in the template that the package can fill in with information for each icon.*/
+
+{{#shapes}}
+
+  {{#first}}
+    .icon {
+      background-image: url('/assets/images/sprites/{{{sprite}}}');
+    }
+  {{/first}}
+
+  .icon--{{base}} {
+    width: {{width.outer}}px;
+    height: {{height.outer}}px;
+    background-position: {{position.relative.xy}};
+  }
+{{/shapes}}
