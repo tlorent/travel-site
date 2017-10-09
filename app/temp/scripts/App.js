@@ -11109,6 +11109,10 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _Modal = __webpack_require__(7);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mobileMenu = new _MobileMenu2.default();
@@ -11122,6 +11126,7 @@ var mobileMenu = new _MobileMenu2.default();
 new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
 new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
 var stickyHeader = new _StickyHeader2.default();
+var modal = new _Modal2.default();
 
 // var $ = require('jquery');
 // import Person from './modules/Person';
@@ -11776,6 +11781,86 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Modal = function () {
+
+  // Select any DOM elements we need to work with
+  function Modal() {
+    _classCallCheck(this, Modal);
+
+    this.openModalButton = (0, _jquery2.default)(".open-modal");
+    this.modal = (0, _jquery2.default)(".modal");
+    this.closeModalButton = (0, _jquery2.default)(".modal__close");
+
+    // begin listening for events as soon as the page loads
+    this.events();
+  }
+
+  // List which events need to be watched for
+
+
+  _createClass(Modal, [{
+    key: "events",
+    value: function events() {
+
+      // Use bind. When openModal() and closeModal() are run, the this keyword will no longer point to the main Modal class/object. This means that you can't access the this.modal property anymore, because the two methods are not being run directly but called by the event handlers. By the time the methods actually run, the this keyword has been reset to the element that was just clicked on. With bind, the this keyword still points to the main object/class so you can still access the this.modal/modal property!
+
+      // clicking the open modal button
+      this.openModalButton.click(this.openModal.bind(this));
+
+      // clicking the x close modal button
+      this.closeModalButton.click(this.closeModal.bind(this));
+
+      // pushes any key
+      // keyup fires when the user lets go of the key
+      // with $(document) select the whole document/page
+      (0, _jquery2.default)(document).keyup(this.keyPressHandler.bind(this));
+    }
+  }, {
+    key: "keyPressHandler",
+    value: function keyPressHandler(e) {
+      if (e.keyCode === 27) {
+        this.closeModal();
+      }
+    }
+  }, {
+    key: "openModal",
+    value: function openModal() {
+      this.modal.addClass("modal--is-visible");
+      return false;
+    }
+  }, {
+    key: "closeModal",
+    value: function closeModal() {
+      this.modal.removeClass("modal--is-visible");
+    }
+  }]);
+
+  return Modal;
+}();
+
+exports.default = Modal;
 
 /***/ })
 /******/ ]);
