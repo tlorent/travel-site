@@ -19,7 +19,6 @@
   }
 
   &__btn-container {
-
     @mixin atMedium {
       float: right;
     }
@@ -42,9 +41,13 @@
       /*width: auto;*/
 
       .site-header--dark & {
-        transform: scale(.545);
+        transform: scale(.56);
       }
     }
+  }
+
+  &__logo__graphic {
+    text-indent: -9999px;
   }
 
   &__menu-icon {
@@ -119,7 +122,7 @@
     transition: all .3s ease-out;
     z-index: -10;
     position: relative; /* Needed for the browser to recognise the z-index */
-    padding-top: 80px;
+    padding-top: 90px;
     text-align: center;
 
     @mixin atMedium {

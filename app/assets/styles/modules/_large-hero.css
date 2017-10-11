@@ -1,5 +1,4 @@
 .large-hero {
-
   border-bottom: 10px solid $mainBlue;
   position: relative;
 
@@ -8,7 +7,7 @@
   }
 
   &__text-content {
-    padding-top: 60px;
+    padding-top: 88px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%); /* position an element vertically relative to itself */

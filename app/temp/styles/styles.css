@@ -470,7 +470,6 @@ a {
 }
 
 .large-hero {
-
   border-bottom: 10px solid #2f5572;
   position: relative;
 }
@@ -480,7 +479,7 @@ a {
   }
 
 .large-hero__text-content {
-    padding-top: 60px;
+    padding-top: 88px;
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -1093,9 +1092,13 @@ a {
   }
 
       .site-header--dark .site-header__logo {
-        -webkit-transform: scale(.545);
-                transform: scale(.545);
+        -webkit-transform: scale(.56);
+                transform: scale(.56);
       }
+  }
+
+.site-header__logo__graphic {
+    text-indent: -9999px;
   }
 
 .site-header__menu-icon {
@@ -1186,7 +1189,7 @@ a {
     transition: all .3s ease-out;
     z-index: -10;
     position: relative; /* Needed for the browser to recognise the z-index */
-    padding-top: 80px;
+    padding-top: 90px;
     text-align: center;
   }
 
