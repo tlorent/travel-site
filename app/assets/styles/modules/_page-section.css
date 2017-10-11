@@ -33,7 +33,7 @@
 
     @mixin atLarge {
       &.lazyloaded {
-        background: url('/assets/images/testimonials-bg.jpg') top center no-repeat; /* aligned vertically top, horizontally center */
+        background: url('../../assets/images/testimonials-bg.jpg') top center no-repeat; /* aligned vertically top, horizontally center */
         background-size: cover;
       }
     }
