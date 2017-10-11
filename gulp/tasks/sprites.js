@@ -1,12 +1,32 @@
 var gulp = require('gulp'),
 svgSprite = require('gulp-svg-sprite'),
 rename = require('gulp-rename'),
-del = require('del');
+del = require('del'),
+svg2png = require('gulp-svg2png');
 
 // Which mode svg sprite package should use
 var config = {
+  shape: {
+    spacing: {
+      padding: 1
+    }
+  },
   mode: {
     css: {
+      // create a filter function that will replace .svg with .png
+      variables: {
+        replaceSvgWithPng: function() {
+          return function(sprite, render) {
+            // render gives us access to the css that lives in the template (see below)
+            // be on the lookout for the sprite variable (dynamic file name) in the render function
+
+            return render(sprite).split('.svg').join('.png');
+
+            // .split looks for .svg and splits the string into an array with .svg removed
+            // .join puts the array back together with .png as the glue, replacing svg with png
+          }
+        }
+      },
       sprite: 'sprite.svg',
       // render out css
       render: {
@@ -33,9 +53,15 @@ gulp.task('createSprite', ['beginClean'], function() {
     .pipe(gulp.dest('./app/temp/sprite/'));
 });
 
+gulp.task('createPngCopy', ['createSprite'], function(){
+  return gulp.src('./app/temp/sprite/css/*.svg')
+    .pipe(svg2png())
+    .pipe(gulp.dest('./app/temp/sprite/css'));
+});
+
 // Stay organized and move the sprites file into the main app images folder
-gulp.task('copySpriteGraphic', ['createSprite'], function() {
-  return gulp.src('./app/temp/sprite/css/**/*.svg')
+gulp.task('copySpriteGraphic', ['createPngCopy'], function() {
+  return gulp.src('./app/temp/sprite/css/**/*.{svg,png}')
     .pipe(gulp.dest('./app/assets/images/sprites'));
 });
 
@@ -54,4 +80,4 @@ gulp.task('endClean', ['copySpriteGraphic', 'copySpriteCSS'], function(){
 });
 
 // In [], list the different tasks that need to be run.
-gulp.task('icons', ['beginClean', 'createSprite', 'copySpriteGraphic','copySpriteCSS', 'endClean']);
+gulp.task('icons', ['beginClean', 'createSprite', 'createPngCopy', 'copySpriteGraphic','copySpriteCSS', 'endClean']);
